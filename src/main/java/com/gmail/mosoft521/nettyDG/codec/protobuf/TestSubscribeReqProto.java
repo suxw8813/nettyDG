@@ -5,17 +5,17 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestSubscribeReqProto {
-
-    private static byte[] encode(SubscribeReqProto.SubscribeReq req) {
+public class TestSubscribeReqProto{
+    
+    private static byte[] encode(SubscribeReqProto.SubscribeReq req){
         return req.toByteArray();
     }
-
-    private static SubscribeReqProto.SubscribeReq decode(byte[] body) throws InvalidProtocolBufferException {
+    
+    private static SubscribeReqProto.SubscribeReq decode(byte[] body) throws InvalidProtocolBufferException{
         return SubscribeReqProto.SubscribeReq.parseFrom(body);
     }
-
-    private static SubscribeReqProto.SubscribeReq createSubscribeReq() {
+    
+    private static SubscribeReqProto.SubscribeReq createSubscribeReq(){
         SubscribeReqProto.SubscribeReq.Builder builder = SubscribeReqProto.SubscribeReq.newBuilder();
         builder.setSubReqID(1);
         builder.setUserName("Lilinfeng");
@@ -27,12 +27,12 @@ public class TestSubscribeReqProto {
         builder.addAllAddress(address);
         return builder.build();
     }
-
+    
     /**
      * @param args
      * @throws InvalidProtocolBufferException
      */
-    public static void main(String[] args) throws InvalidProtocolBufferException {
+    public static void main(String[] args) throws InvalidProtocolBufferException{
         SubscribeReqProto.SubscribeReq req = createSubscribeReq();
         System.out.println("Before encode : " + req.toString());
         SubscribeReqProto.SubscribeReq req2 = decode(encode(req));
@@ -40,20 +40,3 @@ public class TestSubscribeReqProto {
         System.out.println("Assert equal : --> " + req2.equals(req));
     }
 }
-/*
-Before encode : subReqID: 1
-userName: "Lilinfeng"
-productName: "Netty Book"
-address: "NanJing YuHuaTai"
-address: "BeiJing LiuLiChang"
-address: "ShenZhen HongShuLin"
-
-After decode : subReqID: 1
-userName: "Lilinfeng"
-productName: "Netty Book"
-address: "NanJing YuHuaTai"
-address: "BeiJing LiuLiChang"
-address: "ShenZhen HongShuLin"
-
-Assert equal : --> true
- */
